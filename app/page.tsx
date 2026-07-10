@@ -21,23 +21,23 @@ const assets = [
   {id:"card-caption",cat:"信息卡",name:"视频信息条",kind:"caption"},
 ];
 
-function AssetVisual({kind}:{kind:string}) {
+function AssetVisual({kind,text,sub}:{kind:string;text?:string;sub?:string}) {
   switch(kind){
-    case "modal": return <div className="v-modal"><i>✦</i><b>欢迎来我家</b><p>准备好一起探索了吗？</p><button>开始参观　→</button></div>;
-    case "choice": return <div className="v-choice"><span>QUICK CHOICE</span><b>你最喜欢哪个空间？</b><div><button>客厅</button><button>卧室</button></div></div>;
-    case "toast": return <div className="v-toast"><i>✓</i><span><b>收藏成功</b><small>已加入「家的灵感」</small></span><em>×</em></div>;
-    case "wow": return <div className="v-wow">WOW!<span>↗</span></div>;
-    case "note": return <div className="v-note"><small>ROOM NOTE 01</small><b>这里也太<br/>舒服了吧！</b><i>✦</i></div>;
-    case "burst": return <div className="v-burst"><span>新家<br/><b>开箱</b></span></div>;
-    case "room": return <div className="v-room"><span>ROOM</span><b>TOUR</b><i>新家漫游</i></div>;
-    case "laugh": return <div className="v-laugh"><span>哈</span><span>哈</span><span>哈</span></div>;
-    case "subtitle": return <div className="v-subtitle"><span>百万探家博主来我家</span><b>都聊了点啥？</b></div>;
-    case "enter": return <div className="v-enter"><span>进入空间</span><i>→</i></div>;
+    case "modal": return <div className="v-modal"><i>✦</i><b>{text||"欢迎来我家"}</b><p>{sub||"准备好一起探索了吗？"}</p><button>开始参观　→</button></div>;
+    case "choice": return <div className="v-choice"><span>QUICK CHOICE</span><b>{text||"你最喜欢哪个空间？"}</b><div><button>{sub||"客厅"}</button><button>卧室</button></div></div>;
+    case "toast": return <div className="v-toast"><i>✓</i><span><b>{text||"收藏成功"}</b><small>{sub||"已加入「家的灵感」"}</small></span><em>×</em></div>;
+    case "wow": return <div className="v-wow">{text||"WOW!"}<span>↗</span></div>;
+    case "note": return <div className="v-note"><small>{sub||"ROOM NOTE 01"}</small><b>{text||"这里也太舒服了吧！"}</b><i>✦</i></div>;
+    case "burst": return <div className="v-burst"><span>{sub||"新家"}<br/><b>{text||"开箱"}</b></span></div>;
+    case "room": return <div className="v-room"><span>{sub||"ROOM"}</span><b>{text||"TOUR"}</b><i>新家漫游</i></div>;
+    case "laugh": return <div className="v-laugh">{(text||"哈哈哈").slice(0,3).split("").map((x,i)=><span key={i}>{x}</span>)}</div>;
+    case "subtitle": return <div className="v-subtitle"><span>{sub||"百万探家博主来我家"}</span><b>{text||"都聊了点啥？"}</b></div>;
+    case "enter": return <div className="v-enter"><span>{text||"进入空间"}</span><i>→</i></div>;
     case "like": return <div className="v-like">♡<span>219</span></div>;
-    case "nav": return <div className="v-nav"><i>⌃</i><span>向前探索</span><small>2.4m</small></div>;
-    case "profile": return <div className="v-profile"><div className="portrait"/><span><b>李小里</b><small>生活方式创作者</small></span><button>＋ 关注</button></div>;
-    case "progress": return <div className="v-progress"><span><b>探索进度</b><em>06 / 10</em></span><div><i/></div><small>下一个：阳光客厅　→</small></div>;
-    default: return <div className="v-caption"><b>新家 Room tour</b><p>《超想逛你家》拍摄的一天</p><span>01–13　　♡ 219</span></div>;
+    case "nav": return <div className="v-nav"><i>⌃</i><span>{text||"向前探索"}</span><small>{sub||"2.4m"}</small></div>;
+    case "profile": return <div className="v-profile"><div className="portrait"/><span><b>{text||"李小里"}</b><small>{sub||"生活方式创作者"}</small></span><button>＋ 关注</button></div>;
+    case "progress": return <div className="v-progress"><span><b>{text||"探索进度"}</b><em>06 / 10</em></span><div><i/></div><small>{sub||"下一个：阳光客厅　→"}</small></div>;
+    default: return <div className="v-caption"><b>{text||"新家 Room tour"}</b><p>{sub||"《超想逛你家》拍摄的一天"}</p><span>01–13　　♡ 219</span></div>;
   }
 }
 
@@ -47,11 +47,15 @@ export default function Home(){
   const [cover,setCover]=useState("/cover-reference.png");
   const [accent,setAccent]=useState("#ef93b4");
   const [toast,setToast]=useState("");
+  const [texts,setTexts]=useState<Record<string,string>>({});
+  const [subs,setSubs]=useState<Record<string,string>>({});
   const visible=category==="全部"?assets:assets.filter(a=>a.cat===category);
 
   function upload(e:ChangeEvent<HTMLInputElement>){const f=e.target.files?.[0];if(f)setCover(URL.createObjectURL(f));}
   function download(type:"png"|"svg"){
-    const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600"><foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:transparent;font-family:Arial;color:#17171d"><div style="padding:42px;border-radius:28px;background:${accent};font-size:44px;font-weight:800;color:white">${selected.name}</div></div></foreignObject></svg>`;
+    const visual=document.querySelector(".preview>div")?.firstElementChild?.outerHTML ?? `<b>${selected.name}</b>`;
+    const css=Array.from(document.styleSheets).flatMap(sheet=>{try{return Array.from(sheet.cssRules).map(rule=>rule.cssText)}catch{return[]}}).join("\n");
+    const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600"><foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml" style="--accent:${accent};--cover:url('/cover-reference.png');width:1000px;height:600px;display:grid;place-items:center;background:transparent;font-family:Arial,'Microsoft YaHei',sans-serif;color:#17171d"><style>${css}</style>${visual}</div></foreignObject></svg>`;
     if(type==="svg"){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([svg],{type:"image/svg+xml"}));a.download=`${selected.id}.svg`;a.click();}
     else {const img=new Image();img.onload=()=>{const c=document.createElement("canvas");c.width=1000;c.height=600;const ctx=c.getContext("2d")!;ctx.drawImage(img,0,0);c.toBlob(b=>{if(!b)return;const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=`${selected.id}.png`;a.click()},"image/png")};img.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg)}
     setToast(`${selected.name} · ${type.toUpperCase()} 已导出`);setTimeout(()=>setToast(""),2200);
@@ -70,13 +74,14 @@ export default function Home(){
 
       <section className="library">
         <div className="library-head"><div><small>ASSET COLLECTION / 01</small><h2>{category}视觉组件</h2><p>从参考中的弹窗、社交卡片、拼贴文字与交互控件提炼而来</p></div><div className="layout-switch"><button className="on">▦</button><button>☷</button></div></div>
-        <div className="asset-grid">{visible.map((a,i)=><article key={a.id} className={selected.id===a.id?"asset-card selected":"asset-card"} onClick={()=>setSelected(a)}><div className={`asset-stage stage-${a.cat}`}><span className="asset-no">0{assets.indexOf(a)+1}</span><AssetVisual kind={a.kind}/></div><footer><span><b>{a.name}</b><small>{a.cat} · 透明背景</small></span><button aria-label={`选择 ${a.name}`}>↗</button></footer></article>)}</div>
+        <div className="asset-grid">{visible.map(a=><article key={a.id} className={selected.id===a.id?"asset-card selected":"asset-card"} onClick={()=>setSelected(a)}><div className={`asset-stage stage-${a.cat}`}><span className="asset-no">0{assets.indexOf(a)+1}</span><AssetVisual kind={a.kind} text={texts[a.id]} sub={subs[a.id]}/></div><footer><span><b>{a.name}</b><small>{a.cat} · 文字可编辑</small></span><button aria-label={`选择 ${a.name}`}>↗</button></footer></article>)}</div>
       </section>
 
       <aside className="inspector">
         <div className="inspect-head"><span>元素属性</span><button>×</button></div>
-        <div className="preview"><small>LIVE PREVIEW</small><div><AssetVisual kind={selected.kind}/></div></div>
-        <div className="field"><label>素材名称</label><input value={selected.name} readOnly/></div>
+        <div className="preview"><small>LIVE PREVIEW</small><div><AssetVisual kind={selected.kind} text={texts[selected.id]} sub={subs[selected.id]}/></div></div>
+        <div className="field"><label>主文字（实时编辑）</label><input value={texts[selected.id]??""} placeholder="输入主标题；留空使用示例文字" onChange={e=>setTexts({...texts,[selected.id]:e.target.value})}/></div>
+        <div className="field"><label>辅助文字</label><textarea value={subs[selected.id]??""} placeholder="输入说明、距离或副标题" onChange={e=>setSubs({...subs,[selected.id]:e.target.value})}/></div>
         <div className="field"><label>主色</label><div className="color-field"><input type="color" value={accent} onChange={e=>setAccent(e.target.value)}/><span>{accent.toUpperCase()}</span></div></div>
         <div className="field two"><span><label>画布</label><button>透明 ▾</button></span><span><label>倍率</label><button>2× ▾</button></span></div>
         <div className="spec"><span><b>用途</b><em>视频叠加 / 空间交互</em></span><span><b>安全区</b><em>48 px</em></span><span><b>动效建议</b><em>弹性缩放 · 320ms</em></span></div>
