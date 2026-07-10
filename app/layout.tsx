@@ -2,18 +2,18 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "UI Style Lab · 封面风格 UI 生成器",
-  description: "从一张封面提取视觉基因，生成风格统一的 UI 模板。",
+  title: "Element Lab · 视频视觉组件库",
+  description: "从封面风格生成弹窗、贴画、特效文字与空间交互按钮。",
   metadataBase: new URL("https://ui-style-lab.openai.site"),
   openGraph: {
-    title: "UI STYLE LAB",
-    description: "一张封面，生成一套 UI。",
+    title: "ELEMENT LAB · 视频视觉组件库",
+    description: "从一张封面，提取一套可透明导出的视觉元素库。",
     images: [{ url: "/og.png", width: 1672, height: 941 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "UI STYLE LAB",
-    description: "一张封面，生成一套 UI。",
+    title: "ELEMENT LAB · 视频视觉组件库",
+    description: "弹窗、贴画、花字与空间交互按钮，一套生成。",
     images: ["/og.png"],
   },
 };
