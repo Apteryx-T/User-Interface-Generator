@@ -16,6 +16,7 @@ class FakeElement {
   }
   appendChild(child) { this.children.push(child); return child; }
   querySelector() { return new FakeElement(); }
+  querySelectorAll() { return []; }
   remove() {}
   click() {}
 }
@@ -45,6 +46,8 @@ const checks = `
 globalThis.__validation = (async () => {
   const results = [];
   let total = 0;
+  if (typeof pngBlobFor !== 'function' || typeof pngBytesFor !== 'function') throw new Error('缺少 PNG 渲染函数');
+  if (PNG_SCALE !== 2) throw new Error('PNG 高清倍率不是 2 倍');
   for (const [libraryKey, library] of Object.entries(libraries)) {
     if (library.items.length !== 20) throw new Error(library.name + ' 组件数不是 20');
     for (let i = 0; i < library.items.length; i++) {
@@ -66,13 +69,13 @@ globalThis.__validation = (async () => {
   }
   const files = [];
   for (const [libraryKey, library] of Object.entries(libraries)) {
-    library.items.forEach((item, i) => files.push({ name: library.name + '/' + item[1] + '.svg', text: svgFor(i, libraryKey) }));
+    library.items.forEach((item, i) => files.push({ name: library.name + '/' + item[1] + '.png', data: new Uint8Array([137, 80, 78, 71, i, libraryKey.length]) }));
   }
   const zip = makeZip(files);
   const bytes = new Uint8Array(await zip.arrayBuffer());
   const count = bytes[bytes.length - 12] | (bytes[bytes.length - 11] << 8);
   if (count !== total) throw new Error('ZIP 文件数量错误：' + count + '，应为 ' + total);
-  results.push('ZIP: ' + count + ' 个独立 SVG 通过');
+  results.push('ZIP: ' + count + ' 个独立 PNG 通过');
   return results;
 })();`;
 
