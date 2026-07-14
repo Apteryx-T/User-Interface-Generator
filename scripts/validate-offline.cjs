@@ -48,6 +48,7 @@ globalThis.__validation = (async () => {
   let total = 0;
   if (typeof pngBlobFor !== 'function' || typeof pngBytesFor !== 'function') throw new Error('缺少 PNG 渲染函数');
   if (PNG_SCALE !== 2) throw new Error('PNG 高清倍率不是 2 倍');
+  if (typeof $('#currentBatchBtn').onclick !== 'function') throw new Error('缺少当前元素库一键打包按钮');
   for (const [libraryKey, library] of Object.entries(libraries)) {
     if (library.items.length !== 20) throw new Error(library.name + ' 组件数不是 20');
     for (let i = 0; i < library.items.length; i++) {
