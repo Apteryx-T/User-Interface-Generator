@@ -57,6 +57,21 @@ globalThis.__validation = (async () => {
       if (!/<(?:rect|circle|ellipse|path|text)\\b/.test(svg)) throw new Error(library.items[i][1] + ' 缺少可见图形');
       if (!/<text\\b/.test(svg)) throw new Error(library.items[i][1] + ' 缺少文字节点');
       if (/foreignObject/i.test(svg)) throw new Error(library.items[i][1] + ' 含 foreignObject');
+      if (libraryKey === 'fresh') {
+        const textTags = svg.match(/<text\\b[^>]*>/g) || [];
+        if (textTags.some(tag => !/\\bfill="#fff"/.test(tag))) throw new Error(library.items[i][1] + ' has non-white text');
+        if (textTags.some(tag => !tag.includes('font-family="FZShuTi,'))) throw new Error(library.items[i][1] + ' is not using the cute handwriting font stack');
+        if (textTags.some(tag => !tag.includes('stroke="#19181d" stroke-width="10"'))) throw new Error(library.items[i][1] + ' is missing the dark text outline');
+        if (textTags.some(tag => !tag.includes('paint-order="stroke fill"'))) throw new Error(library.items[i][1] + ' has an incorrect text paint order');
+        if (!svg.includes('<feColorMatrix type="saturate" values="0.72"/>')) throw new Error(library.items[i][1] + ' is missing the softened saturation filter');
+        if ((svg.match(/<feFunc[RGB] type="linear" slope="1.3"\\/>/g) || []).length !== 3) throw new Error(library.items[i][1] + ' is missing the 30% brightness increase');
+        if (i === 0 && !/font-size="76"/.test(svg)) throw new Error('Fresh library text is not enlarged by 15%');
+      }
+      if (libraryKey === 'sketch') {
+        const textTags = svg.match(/<text\\b[^>]*>/g) || [];
+        if (textTags.some(tag => !/\\bfill="#fff"/.test(tag))) throw new Error(library.items[i][1] + ' has non-white text');
+        if (i === 0 && !/stroke-width="30"/.test(svg)) throw new Error('Sketch strokes are not doubled');
+      }
       const original = copies[libraryKey + ':' + i];
       copies[libraryKey + ':' + i] = { main: 'MARK_MAIN_' + i, sub: 'MARK_SUB_' + i };
       const edited = svgFor(i, libraryKey);

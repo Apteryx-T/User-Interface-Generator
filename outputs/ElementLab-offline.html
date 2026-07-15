@@ -56,7 +56,7 @@ const libraries={
     ]
   },
   fresh:{
-    name:'小清新视觉元素库',label:'FRESH / POP STICKERS · MOBILE BALANCED',description:'按小红书手机端重新校准主标题、副文案与图案比例；使用白边贴纸、明亮马卡龙色和圆润轮廓，适合日常 Vlog、学习与轻互动视频。',palette:['#f523a8','#cfff28','#5d6eff','#8e5be8','#ff8a18'],accent:'#f523a8',
+    name:'小清新视觉元素库',label:'FRESH / POP STICKERS · MOBILE BALANCED',description:'按小红书手机端重新校准主标题、副文案与图案比例；使用白边贴纸、柔和马卡龙色和圆润轮廓，适合日常 Vlog、学习与轻互动视频。',palette:['#d64f9f','#bcd85a','#7480d9','#9877cb','#dc9750'],accent:'#d64f9f',
     items:[
       ['文字贴纸','爱心宣言贴','heart','永远热爱','NEVER STOP LOVING'],['文字贴纸','椭圆心情贴','oval','喜欢这个！','TODAY MOOD'],['文字贴纸','认证标签','guarantee','元气认证！','FRESH GUARANTEED'],['文字贴纸','新能量爆炸贴','sunburst','新能量','NEW ENERGY'],['气泡弹窗','蓝色对话气泡','speech','我没事','I’M RIGHT'],['气泡弹窗','云朵提醒弹窗','cloud','晚点再聊？','10:30 PM'],['交互按钮','工作模式开关','toggle','工作模式','已开启'],['表情贴画','开心笑脸章','smile','今天很开心','HAPPY DAY'],['文字贴纸','放射星芒贴','burst','放轻松','RELAX'],['气泡弹窗','花边项目卡','scallop','这是我的新计划','MY FRESH PROJECT'],['交互按钮','票券开关','ticket','专注模式','ON'],['信息标签','用户名胶囊','username','@freshday','FOLLOW ME'],['图标贴画','笔记本电脑','laptop','灵感在线','CREATIVE WORK'],['图标贴画','彩色信封','envelope','新消息','YOU GOT MAIL'],['图标贴画','音乐耳机','headphones','播放歌单','GOOD MOOD'],['交互按钮','Ctrl 快捷键','keycap','Ctrl','快捷操作'],['图标贴画','点击光标','cursor','点击这里','CLICK'],['图标贴画','珍珠奶茶','bubbletea','来杯甜的','YUM!'],['表情贴画','害羞表情方块','emoji','好耶！','SO CUTE'],['特效文字','巨大 OK 字贴','ok','OK!','EVERYTHING IS FINE']
     ]
@@ -175,6 +175,22 @@ function svgFor(i,chosenStyle=styleKey){let old=styleKey;styleKey=chosenStyle;le
     else if(k==='polaroidNote')body=`<g transform="rotate(4 600 350)"><rect x="325" y="65" width="550" height="570" fill="white" stroke="${ink}" stroke-width="7"/><rect x="360" y="105" width="480" height="330" fill="#c6d9d7"/><path d="M380 410L510 275L620 365L735 220L825 410Z" fill="#8fb4ad"/><circle cx="500" cy="205" r="38" fill="#fff3b0"/>${hand(600,510,m,62)}${hand(600,575,s,36,a,700)}</g>${line('M865 105C930 55 960 125 915 180',8)}`;
     else if(k==='reminderCard')body=`<rect x="280" y="140" width="640" height="420" rx="28" fill="#fffdf7" stroke="${ink}" stroke-width="7"/><circle cx="335" cy="200" r="14" fill="${a}"/><circle cx="385" cy="200" r="14" fill="#d8ff78"/>${hand(435,215,s,36,'#777',700,'start')}<path d="M320 255H880" stroke="#ccc" stroke-width="4"/>${multiline(600,335,m.replace(/ /g,'|'),66,ink,800,1.08)}${line('M790 475L830 515L885 425',11,a)}`;
     else body=`<path d="M285 240C370 200 830 205 910 250C965 285 950 430 870 465C765 500 390 495 295 455C215 420 210 280 285 240Z" fill="white" stroke="${ink}" stroke-width="8"/><path d="M305 260C410 225 790 225 880 265C930 290 920 405 855 435C725 470 430 465 320 430C265 400 255 295 305 260Z" fill="${a}" opacity=".22"/>${hand(555,345,m,72,ink,900)}${hand(555,425,s,38,a,800)}${line('M835 315L890 360L825 410',10,ink)}`;
+  }
+  if(chosenStyle==='sketch'){
+    body=body.replace(/stroke-width="(\d+(?:\.\d+)?)"/g,(_,value)=>`stroke-width="${Number(value)*2}"`);
+    body=body.replace(/(<text\b[^>]*\sfill=")[^"]*(")/g,'$1#fff$2');
+  }
+  if(chosenStyle==='fresh'){
+    const cuteFont='FZShuTi,方正舒体,STXingkai,华文行楷,YouYuan,幼圆,KaiTi,楷体,Segoe Print,Comic Sans MS,cursive';
+    body=body.replace(/(<text\b[^>]*\sfont-family=")[^"]*(")/g,`$1${cuteFont}$2`);
+    body=body.replace(/(<text\b[^>]*\sfill=")[^"]*(")/g,'$1#fff$2');
+    body=body.replace(/font-size="(\d+(?:\.\d+)?)"/g,(_,value)=>`font-size="${Math.round(Number(value)*1.15)}"`);
+    body=body.replace(/<text\b[^>]*>/g,tag=>tag
+      .replace(/\sstroke="[^"]*"/g,'')
+      .replace(/\sstroke-width="[^"]*"/g,'')
+      .replace(/\spaint-order="[^"]*"/g,'')
+      .replace('>',' stroke="#19181d" stroke-width="10" stroke-linejoin="round" paint-order="stroke fill">'));
+    body=`<defs><filter id="fresh-soft-color" color-interpolation-filters="sRGB"><feColorMatrix type="saturate" values="0.72"/><feComponentTransfer><feFuncR type="linear" slope="1.3"/><feFuncG type="linear" slope="1.3"/><feFuncB type="linear" slope="1.3"/></feComponentTransfer></filter></defs><g filter="url(#fresh-soft-color)">${body}</g>`;
   }
   let result=`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-label="${esc(items()[i][1])}">${body}</svg>`;styleKey=old;return result;
 }
