@@ -20,7 +20,7 @@ header{height:68px;background:#17171d;color:#fff;display:flex;align-items:center
   <select id="styleSelect" class="style-select" aria-label="选择视觉元素库"></select>
   <span class="header-meta" id="headerMeta"></span>
   <button class="batch current" id="currentBatchBtn">打包当前元素库 PNG ↓</button>
-  <button class="batch all" id="batchBtn">打包全部 80 款 PNG ↓</button>
+  <button class="batch all" id="batchBtn">打包全部 160 款 PNG ↓</button>
 </header>
 <div class="app">
   <aside class="left">
@@ -42,7 +42,7 @@ header{height:68px;background:#17171d;color:#fff;display:flex;align-items:center
     <h3 id="assetName"></h3>
     <div class="preview" id="preview"></div>
     <div class="field"><label>主文字（可编辑）</label><input id="mainText"></div>
-    <div class="field"><label>辅助文字（可编辑）</label><textarea id="subText"></textarea></div>
+    <div class="field" hidden style="display:none"><label>辅助文字（已停用）</label><textarea id="subText"></textarea></div>
     <button class="export" id="exportBtn">导出透明 PNG <b>↗</b></button>
     <p class="tip">PNG 保持透明背景，尺寸为 2400 × 1400；适合视频剪辑、AE/PR、Figma、Illustrator 和空间交互。</p>
   </aside>
@@ -78,8 +78,82 @@ const libraries={
       ['手写批注','弯曲指示箭头','sketchArrow','看这里','LOOK HERE'],['手写批注','手绘圈选标记','sketchCircle','重点内容','IMPORTANT'],['手写批注','双重下划线','sketchUnderline','记住这一点','REMEMBER'],['手写批注','闪光强调符号','sketchSparkles','值得收藏','SAVE THIS'],['手写批注','手绘括号标签','sketchBracket','补充说明','SIDE NOTE'],
       ['草图卡片','撕纸便签卡','paperNote','今天要做的事','TO-DO LIST'],['草图卡片','拍立得说明卡','polaroidNote','这一刻值得记录','MEMORY'],['草图卡片','提醒事项卡','reminderCard','别忘了保存灵感','REMINDER'],['草图卡片','涂鸦胶囊按钮','scribbleButton','继续看看','KEEP GOING']
     ]
+  },
+  groovy:{
+    name:'复古快乐视觉元素库',label:'RETRO GROOVY / HAPPY STICKERS',description:'提取 70 年代复古字标、糖果色套边、粗黑轮廓、笑脸、雏菊与黑胶唱片元素；适合轻松日常、潮流字幕、音乐内容、品牌贴纸与快乐情绪视频。',palette:['#f48fb1','#f04e4e','#f6b529','#2b5b91','#2a164f','#70a5d8'],accent:'#f48fb1',
+    items:[
+      ['复古字标','Cool 斜体字标','groovyCool','COOL!','RETRO MOOD'],['复古字标','被爱彩虹字标','groovyLoved','YOU ARE LOVED','SPREAD THE LOVE'],['复古字标','Hello 粗衬线字标','groovyHello','HELLO!','NICE TO SEE YOU'],['复古字标','Good Vibes 叠字贴','groovyVibes','GOOD|VIBES','FEEL IT'],['复古字标','Slay 椭圆字标','groovySlay','SLAY!','OWN THE DAY'],['复古字标','Smile 复古胶囊','groovySmile','SMILE','KEEP IT BRIGHT'],['复古字标','Peace 椭圆徽章','groovyPeace','PEACE','TAKE IT SLOW'],['复古字标','Sweet 脚本字标','groovySweet','SWEET','SOFT & SUNNY'],
+      ['励志贴纸','Good Day 花字贴','groovyGoodDay','GOOD|DAY!','MAKE IT COUNT'],['励志贴纸','Take It Easy 波浪字','groovyEasy','TAKE IT|EASY','NO RUSH'],['励志贴纸','Chill Out 堆叠字','groovyChill','CHILL|OUT','SLOW DOWN'],['励志贴纸','Be Kind 丝带字标','groovyKind','BE KIND','ALWAYS'],['励志贴纸','Believe 阴影牌','groovyBelieve','BELIEVE','IN GOOD THINGS'],['励志贴纸','OMG 花边章','groovyOmg','OMG','WHAT A MOMENT'],
+      ['快乐图标','经典快乐笑脸','groovyHappyFace','HAPPY','GOOD TIMES'],['快乐图标','蓝色可爱小幽灵','groovyGhost','HI THERE','LITTLE BUDDY'],['快乐图标','彩虹同乐牌','groovyTogether','HAPPY|TOGETHER','BETTER WITH YOU'],
+      ['自然徽章','雏菊笑脸贴','groovyDaisy','BLOOM','STAY SUNNY'],['自然徽章','自然花朵拱门','groovyNature','NATURE','GROW WITH JOY'],['自然徽章','黑胶唱片徽章','groovyVinyl','JUST PLAY','GOOD VIBES ONLY']
+    ]
+  },
+  planner:{
+    name:'手帐计划视觉元素库',label:'PLANNER / DAILY DOODLE STICKERS',description:'提取手帐贴纸的珊瑚红、草绿、浅蓝与柔粉配色，搭配细长手写字、双线标签、随手涂鸦和日常计划图标；适合日程安排、学习记录、效率内容、生活 Vlog 与轻松提示字幕。',palette:['#e45e5b','#238a68','#8fc8df','#f4b2b3','#176da3','#f7f5ef'],accent:'#e45e5b',
+    items:[
+      ['计划字标','Meal Plan 双层字标','plannerMeal','MEAL PLAN','PLAN YOUR WEEK'],['计划字标','Don’t Forget 提醒条','plannerForget','DON’T FORGET','SAVE THE DATE'],['计划字标','Work 斜体贴纸','plannerWork','WORK','FOCUS TIME'],['计划字标','You Got This 鼓励牌','plannerGotThis','YOU GOT THIS!','KEEP GOING'],['计划字标','Remember 云朵提示','plannerRemember','REMEMBER!','ONE MORE THING'],['计划字标','Notes 双线胶囊','plannerNotes','NOTES','WRITE IT DOWN'],['计划字标','To Do 椭圆清单','plannerTodo','TO DO','TODAY’S LIST'],['计划字标','Tomorrow 手写字贴','plannerTomorrow','TOMORROW','NEXT UP'],
+      ['日程标签','To Buy 蓝色标签','plannerBuy','TO BUY','SHOPPING LIST'],['日程标签','Weekend 圆角标签','plannerWeekend','WEEKEND','SLOW DAYS'],['日程标签','Today 彩色字标','plannerToday','TODAY','MAKE IT COUNT'],['日程标签','Important 下划线牌','plannerImportant','IMPORTANT!','DON’T MISS IT'],['日程标签','Nice Day 圆章','plannerNiceDay','HAVE A|NICE DAY','SMALL JOYS'],
+      ['鼓励贴纸','Yay 放射字贴','plannerYay','YAY!','YOU DID IT'],['鼓励贴纸','Exercise 哑铃字标','plannerExercise','EXERCISE','MOVE YOUR BODY'],['鼓励贴纸','Okay 表情字贴','plannerOkay','OK!','ALL GOOD'],
+      ['生活图标','盆栽仙人掌','plannerCactus','GROW','ONE STEP A DAY'],['生活图标','暖饮马克杯','plannerMug','COFFEE TIME','TAKE A BREAK'],['生活图标','晚安月亮贴','plannerMoon','GOOD NIGHT','REST & RESET'],['生活图标','爱心回形针','plannerClip','LOVE NOTE','KEEP IT CLOSE']
+    ]
+  },
+  sweetheart:{
+    name:'甜心告白视觉元素库',label:'SWEETHEART / CANDY LOVE STICKERS',description:'提取奶油黄、蜜桃橙与珊瑚红的糖果配色，以白色内芯、双线描边、爱心气泡和复古圆体字营造甜蜜告白氛围；适合情侣日常、可爱字幕、纪念日、婚礼、礼物与情绪贴纸。',palette:['#f5b552','#f27655','#ffd17a','#fff8e9','#df6f78','#e79a45'],accent:'#f5b552',
+    items:[
+      ['告白气泡','Starlight 星光气泡','sweetStarlight','YOU’RE MY|STARLIGHT','SHINE WITH ME'],['告白气泡','Born To Shine 长气泡','sweetShine','I WAS BORN|TO SHINE','BRIGHT & BOLD'],['告白气泡','Baby Bear 思念气泡','sweetBabyBear','HI, BABY|BEAR','MISS YOU'],['告白气泡','Sweet Bomb 云朵贴','sweetBomb','SWEET|BOMB!','LOVE EXPLOSION'],['告白气泡','Baby Pudding 椭圆气泡','sweetPudding','HI, BABY|PUDDING!','SOFT & SWEET'],['告白气泡','In My Head 思绪泡','sweetHead','YOU’RE IN|MY HEAD…','ALL DAY LONG'],['告白气泡','Melt My Heart 圆气泡','sweetMelt','YOU MELT|MY HEART','EVERY TIME'],
+      ['甜心标签','Chu 椭圆亲亲贴','sweetChu','CHU♥','KISS KISS'],['甜心标签','Forever Love 方牌','sweetForever','FOREVER|LOVE','US ALWAYS'],['甜心标签','Queen 爱心胶囊','sweetQueen','♥ QUEEN ♥','ROYAL LOVE'],['甜心标签','Star 蜜糖胶囊','sweetStar','♥ STAR ♥','KEEP SHINING'],['甜心标签','Cute 珊瑚标签','sweetCute','♥ CUTE ♥','ADORABLE'],['甜心标签','Sugarboo 细线标签','sweetSugarboo','♥ SUGARBOO ♥','MY FAVORITE'],
+      ['爱心贴纸','双线爱心章','sweetHeart','LOVE','FROM MY HEART'],['爱心贴纸','Cute 三连爱心','sweetTriple','CUTE!|CUTE!|CUTE!','TRIPLE LOVE'],['爱心贴纸','甜心气球束','sweetBalloons','LOVE NOTES','FLOAT WITH ME'],['爱心贴纸','爱心便签泡','sweetHeartNote','MY LOVE','KEEP IT CLOSE'],
+      ['浪漫宣言','Marry Me 双选牌','sweetMarry','MARRY ME?','♡ YES!  ♡ YEEEES!'],['浪漫宣言','Too Pretty 闪光气泡','sweetPretty','I’M TOO|PRETTY','GLOW ON'],['浪漫宣言','Fly Away 长气泡','sweetFly','FLY AWAY|WITH ME!','TOGETHER']
+    ]
+  },
+  botanical:{
+    name:'植物阅读视觉元素库',label:'BOTANICAL / BOOKISH GREEN STICKERS',description:'提取鼠尾草绿、森林绿、奶油白与植物系贴纸语言，融合书本、花叶、蝴蝶、能量图标和女性成长标语；适合读书分享、学习记录、自然生活、心理成长与轻松日常视频。',palette:['#2d7450','#79a96b','#b8d8a8','#dcebcf','#8ea35f','#f7f4e9'],accent:'#2d7450',
+    items:[
+      ['阅读字标','Hot Girls Read 脚本字','botHotRead','HOT GIRLS READ','READ WITH HEART'],['阅读字标','One More Chapter 云朵字','botChapter','ONE MORE CHAPTER','JUST ONE MORE'],['阅读字标','Bookish Era 堆叠字','botBookish','IN MY|BOOKISH ERA','CURRENT CHAPTER'],['阅读字标','Big Book Energy 花边贴','botBigBook','BIG BOOK|ENERGY','READER MODE'],['阅读字标','Book Club 椭圆徽章','botBookClub','BOOK|CLUB','READ TOGETHER'],['阅读字标','Book Therapy 软边字','botTherapy','BOOK|THERAPY','TIME TO HEAL'],
+      ['成长能量','Keep Growing 芽叶字标','botGrowing','KEEP|GROWING','AT YOUR PACE'],['成长能量','Garden Girlie 花体贴','botGarden','GARDEN|GIRLIE','BLOOM DAILY'],['成长能量','Plant Powered 双行字','botPowered','PLANT|POWERED','GREEN ENERGY'],['成长能量','Protect Energy 圆章','botProtect','PROTECT|YOUR ENERGY','REST IS PRODUCTIVE'],['成长能量','Emotional Support Kindle','botKindle','EMOTIONAL|SUPPORT KINDLE','COMFORT READ'],['成长能量','Main Character Energy','botMain','MAIN CHARACTER|ENERGY','OWN YOUR STORY'],
+      ['生活态度','No Stress 波浪字','botStress','NO STRESS|NO STRESS','BREATHE'],['生活态度','Good Vibes 双层字','botVibes','GOOD|VIBES','ONLY'],['生活态度','Good Things 方形便签','botComing','GOOD THINGS|ARE COMING','TRUST THE TIMING'],['生活态度','Be The Energy 花朵贴','botAttract','BE THE ENERGY|YOU WANT TO ATTRACT','GLOW GENTLY'],['生活态度','Future Is Female 奶油字','botFuture','THE FUTURE|IS FEMALE','GROW TOGETHER'],
+      ['自然图标','复古书本叠放','botBooks','READ MORE','STACK YOUR STORIES'],['自然图标','四盆绿色植物','botPlants','PLANT FRIENDS','GROWING CREW'],['自然图标','蝴蝶手帐卡','botButterfly','STAY CURIOUS','FOLLOW THE LIGHT']
+    ]
   }
 };
+const propertyCopy={
+  feminine:[
+    '欢迎看房','已收藏房源','稀缺好房','采光真的好','品质好房','户型亮点','预约看房','继续参观','房产顾问','今日新房源',
+    '近地铁好房','新上好房','房源详情','你更喜欢哪套','好房值得等待','看房重点','搜索心仪房源','第1套','理想居所','值得收藏'
+  ],
+  fresh:[
+    '安心置业','这套不错','品质房源','今日上新','价格可谈','随时看房','看房模式','入住幸福','诚意出售','精装好房',
+    '锁定房源','房源推荐','在线选房','预约成功','听我说房','立即咨询','点击看房','宜居生活','真的很赞','成交！'
+  ],
+  universal:[
+    '价格惊喜','限时好价','急售好房','抢先看房','热门房源','新房速递','评论领户型图','私信预约看房','立即预约','了解详情',
+    '地铁口好房','两居室｜南北通透','89㎡｜三室两厅','宽景客厅','步行5分钟','本周精选','户型真的不错','大家都说好','看房第1站','地铁口好房'
+  ],
+  sketch:[
+    '看房路线','买房灵感','住得舒心','好房发生','心动户型','适合你吗','今日探房','新盘实拍','家的理想模样','核心卖点',
+    '好房值得等待','看这里','户型亮点','重点来了','值得收藏','补充说明','看房清单','实拍房源','预约看房','继续看房'
+  ],
+  groovy:[
+    '热门好房','一见倾心','欢迎看房','宜居|生活','品质之选','幸福入住','安心置业','温馨小家','今日|上新','轻松|看房',
+    '舒适|空间','好房推荐','相信眼光','价格惊喜','开门见喜','新房速递','幸福|安家','花园洋房','绿色社区','配套齐全'
+  ],
+  planner:[
+    '看房计划','别忘看房','买房攻略','好房来了','记得收藏','看房笔记','待看房源','明日看房','购房清单','周末看房',
+    '今日探房','重点房源','看房|愉快','成交啦','实地探房','可以入手','稳步增值','聊聊房子','晚安好房','收藏房源'
+  ],
+  sweetheart:[
+    '梦中|情房','品质|闪耀','温馨|小家','甜蜜|新居','幸福|之家','一直|惦记','心动|好房','喜欢','长久|安居','女王之家',
+    '明星房源','精致小家','甜蜜安家','心动','喜欢|喜欢|喜欢','乔迁之喜','爱的家','一起安家？','精装|美宅','搬进|新家'
+  ],
+  botanical:[
+    '热门房源','再看一套','买房|攻略','房源|信息','看房|团','安家|疗愈','稳步|增值','花园|洋房','绿色|住宅','守护|资产',
+    '购房|指南','主角之家','买房不焦虑','宜居|氛围','好房|即将上新','选对房|住得好','理想|生活','房源资料','绿意社区','探索新居'
+  ]
+};
+Object.entries(propertyCopy).forEach(([libraryKey,copy])=>{
+  if(copy.length!==20)throw new Error(`${libraryKey} 房产中文词库数量不是 20`);
+  libraries[libraryKey].items.forEach((item,index)=>{item[3]=copy[index]});
+});
 const $=s=>document.querySelector(s);let styleKey='feminine',selected=0,filter='全部',copies={};
 const lib=()=>libraries[styleKey],items=()=>lib().items,key=i=>styleKey+':'+i;
 const totalItems=()=>Object.values(libraries).reduce((sum,current)=>sum+current.items.length,0);
@@ -98,7 +172,7 @@ function svgFor(i,chosenStyle=styleKey){let old=styleKey;styleKey=chosenStyle;le
     else if(k==='ring')body=`<circle cx="600" cy="350" r="170" fill="#19181ddd" stroke="${white}" stroke-width="5"/><circle cx="600" cy="350" r="190" fill="none" stroke="#ffffff66" stroke-width="20"/>${text(600,292,'⌃',70,a)}${text(600,370,m,38,white)}${text(600,420,s,24,'#bbb',400)}`;
     else if(k==='profile')body=`<rect x="260" y="265" width="680" height="170" rx="40" fill="${white}"/><circle cx="365" cy="350" r="58" fill="${a}"/>${text(455,335,m,40,ink,700,'start')}${text(455,380,s,24,'#888',400,'start')}<rect x="745" y="312" width="140" height="70" rx="22" fill="${a}"/>${text(815,357,'＋ 关注',24)}`;
     else if(k==='caption')body=`<rect x="250" y="255" width="700" height="210" rx="14" fill="#19181dee"/><rect x="250" y="255" width="18" height="210" fill="${a}"/>${text(315,340,m,48,white,700,'start')}${text(315,395,s,28,'#bbb',400,'start')}`;
-    else if(k==='stats')body=`${text(600,225,m,29,ink,700)}<rect x="250" y="260" width="700" height="180" rx="36" fill="${white}"/>${text(390,335,'2060',52)}${text(390,385,'粉丝',24,'#777',400)}${text(600,335,'110',52)}${text(600,385,'帖子',24,'#777',400)}${text(810,335,'60',52)}${text(810,385,'关注',24,'#777',400)}${text(600,480,s,22,'#777',400)}`;
+    else if(k==='stats')body=`<rect x="250" y="260" width="700" height="180" rx="36" fill="${white}" stroke="#dedede" stroke-width="4"/>${text(600,350,m,50,ink,800)}${text(390,385,'粉丝',24,'#777',400)}${text(600,385,'帖子',24,'#777',400)}${text(810,385,'关注',24,'#777',400)}${text(600,480,s,22,'#777',400)}`;
     else if(k==='story')body=`<circle cx="600" cy="320" r="185" fill="none" stroke="${a}" stroke-width="28"/><circle cx="600" cy="320" r="150" fill="${ink}" stroke="${white}" stroke-width="10"/>${text(600,340,m,58,white)}${text(600,565,s,25,ink,500)}`;
     else if(k==='tabs')body=`<rect x="280" y="285" width="640" height="130" rx="34" fill="${white}"/><rect x="300" y="305" width="190" height="90" rx="25" fill="${ink}"/>${text(395,363,m,30,white)}${text(600,363,'收藏',30)}${text(805,363,'关于',30)}${text(600,465,s,23,ink,500)}`;
     else if(k==='poll')body=`<rect x="310" y="170" width="580" height="350" rx="50" fill="#fff0f5" stroke="${white}" stroke-width="10"/><path d="M330 520H870" stroke="${a}" stroke-width="18"/>${text(600,275,m,46)}${text(600,325,s,23,'#777',500)}<rect x="390" y="365" width="190" height="80" rx="18" fill="${white}"/>${text(485,417,'客厅',30)}<rect x="620" y="365" width="190" height="80" rx="18" fill="${white}"/>${text(715,417,'卧室',30)}`;
@@ -151,7 +225,7 @@ function svgFor(i,chosenStyle=styleKey){let old=styleKey;styleKey=chosenStyle;le
     else if(k==='reviewStack')body=`<rect x="300" y="150" width="590" height="170" rx="30" fill="white" stroke="${ink}" stroke-width="7" transform="rotate(-5 595 235)"/><rect x="350" y="280" width="590" height="170" rx="30" fill="white" stroke="${ink}" stroke-width="7" transform="rotate(4 645 365)"/><rect x="280" y="405" width="590" height="150" rx="30" fill="white" stroke="${ink}" stroke-width="7" transform="rotate(-3 575 480)"/>${text(600,265,m,58,ink,900)}${text(600,370,s,26,red,900)}${text(600,485,'★★★★★',34,yellow,900)}`;
     else if(k==='stepBadge')body=`<circle cx="600" cy="330" r="210" fill="${yellow}" stroke="${ink}" stroke-width="10"/><circle cx="600" cy="330" r="170" fill="none" stroke="${red}" stroke-width="10" stroke-dasharray="18 14"/>${text(600,300,s,50,red,900)}${text(600,385,m,58,ink,900)}${text(600,455,'→',48,ink,900)}`;
     else body=`<path d="M350 225H850Q900 225 900 275V425Q900 475 850 475H665L600 550L535 475H350Q300 475 300 425V275Q300 225 350 225Z" fill="white" stroke="${ink}" stroke-width="8"/>${text(390,330,'⌖',72,red,900)}${text(475,330,m,47,ink,900,'start')}${text(475,390,s,23,'#777',700,'start')}`;
-  }else{
+  }else if(chosenStyle==='sketch'){
     const handFont='FZShuTi,方正舒体,STXingkai,华文行楷,KaiTi,楷体,Segoe Script,Comic Sans MS,cursive';
     const hand=(x,y,value,size=60,fill=ink,weight=700,anchor='middle')=>`<text x="${x}" y="${y}" text-anchor="${anchor}" font-family="${handFont}" font-size="${size}" font-weight="${weight}" fill="${fill}">${esc(value)}</text>`;
     const line=(d,width=11,color=a)=>`<path d="${d}" fill="none" stroke="${color}" stroke-width="${width}" stroke-linecap="round" stroke-linejoin="round"/><path d="${d}" fill="none" stroke="${color}" stroke-width="${Math.max(2,width-5)}" stroke-linecap="round" stroke-linejoin="round" opacity=".42" transform="translate(4 -3)"/>`;
@@ -175,23 +249,184 @@ function svgFor(i,chosenStyle=styleKey){let old=styleKey;styleKey=chosenStyle;le
     else if(k==='polaroidNote')body=`<g transform="rotate(4 600 350)"><rect x="325" y="65" width="550" height="570" fill="white" stroke="${ink}" stroke-width="7"/><rect x="360" y="105" width="480" height="330" fill="#c6d9d7"/><path d="M380 410L510 275L620 365L735 220L825 410Z" fill="#8fb4ad"/><circle cx="500" cy="205" r="38" fill="#fff3b0"/>${hand(600,510,m,62)}${hand(600,575,s,36,a,700)}</g>${line('M865 105C930 55 960 125 915 180',8)}`;
     else if(k==='reminderCard')body=`<rect x="280" y="140" width="640" height="420" rx="28" fill="#fffdf7" stroke="${ink}" stroke-width="7"/><circle cx="335" cy="200" r="14" fill="${a}"/><circle cx="385" cy="200" r="14" fill="#d8ff78"/>${hand(435,215,s,36,'#777',700,'start')}<path d="M320 255H880" stroke="#ccc" stroke-width="4"/>${multiline(600,335,m.replace(/ /g,'|'),66,ink,800,1.08)}${line('M790 475L830 515L885 425',11,a)}`;
     else body=`<path d="M285 240C370 200 830 205 910 250C965 285 950 430 870 465C765 500 390 495 295 455C215 420 210 280 285 240Z" fill="white" stroke="${ink}" stroke-width="8"/><path d="M305 260C410 225 790 225 880 265C930 290 920 405 855 435C725 470 430 465 320 430C265 400 255 295 305 260Z" fill="${a}" opacity=".22"/>${hand(555,345,m,72,ink,900)}${hand(555,425,s,38,a,800)}${line('M835 315L890 360L825 410',10,ink)}`;
+  }else if(chosenStyle==='groovy'){
+    const coral='#f04e4e',gold='#f6b529',navy='#2b5b91',plum='#2a164f',sky='#70a5d8',cream='#fff4d8',mint='#6ea09c',rose=a;
+    const groovyFont='Cooper Black,Cooper Std Black,Georgia,Arial Black,Microsoft YaHei,sans-serif';
+    const single=value=>String(value).replace(/[|\n]/g,' ');
+    const groovyText=(x,y,value,size=72,fill=cream,stroke=ink,sw=8,weight=900,anchor='middle',family=groovyFont)=>`<text x="${x}" y="${y}" text-anchor="${anchor}" font-family="${family}" font-size="${size}" font-weight="${weight}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" stroke-linejoin="round" paint-order="stroke fill">${esc(value)}</text>`;
+    const groovyMulti=(x,y,value,size=86,fill=cream,stroke=ink,sw=8,leading=.82)=>{let lines=String(value).split(/[|\n]/);return `<text x="${x}" y="${y}" text-anchor="middle" font-family="${groovyFont}" font-size="${size}" font-weight="900" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" stroke-linejoin="round" paint-order="stroke fill">${lines.map((v,n)=>`<tspan x="${x}" dy="${n?size*leading:0}">${esc(v)}</tspan>`).join('')}</text>`};
+    const sparkle=(x,y,size=38,color=gold)=>`<path d="M${x} ${y-size}L${x+size*.24} ${y-size*.24}L${x+size} ${y}L${x+size*.24} ${y+size*.24}L${x} ${y+size}L${x-size*.24} ${y+size*.24}L${x-size} ${y}L${x-size*.24} ${y-size*.24}Z" fill="${color}" stroke="${ink}" stroke-width="5"/>`;
+    const happyFace=(cx,cy,r,fill=gold)=>`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${fill}" stroke="${ink}" stroke-width="9"/><ellipse cx="${cx-r*.35}" cy="${cy-r*.18}" rx="${r*.11}" ry="${r*.22}" fill="${ink}"/><ellipse cx="${cx+r*.35}" cy="${cy-r*.18}" rx="${r*.11}" ry="${r*.22}" fill="${ink}"/><path d="M${cx-r*.48} ${cy+r*.12}Q${cx} ${cy+r*.72} ${cx+r*.48} ${cy+r*.12}" fill="none" stroke="${ink}" stroke-width="8" stroke-linecap="round"/>`;
+    const daisy=(cx,cy,r=145)=>`${Array.from({length:10},(_,n)=>`<ellipse cx="${cx}" cy="${cy-r*.72}" rx="${r*.26}" ry="${r*.55}" fill="white" stroke="${ink}" stroke-width="7" transform="rotate(${n*36} ${cx} ${cy})"/>`).join('')}${happyFace(cx,cy,r*.48,gold)}`;
+    const sm=single(m),ss=single(s);
+    if(k==='groovyCool')body=`<g transform="rotate(-5 600 350)">${groovyText(620,415,sm,174,ink,ink,0,900)}${groovyText(600,385,sm,174,rose,ink,11,900)}${groovyText(610,480,ss,31,cream,ink,6,800)}</g>${sparkle(935,190,34,coral)}`;
+    else if(k==='groovyLoved')body=`<rect x="190" y="210" width="820" height="280" rx="120" fill="${cream}" stroke="${gold}" stroke-width="48"/><rect x="190" y="210" width="820" height="280" rx="120" fill="none" stroke="${rose}" stroke-width="25"/><rect x="190" y="210" width="820" height="280" rx="120" fill="none" stroke="${coral}" stroke-width="10"/>${groovyText(600,350,sm,100,coral,plum,9,900)}${groovyText(600,430,ss,27,navy,cream,5,800)}${sparkle(180,190,30,gold)}${sparkle(1020,485,26,coral)}`;
+    else if(k==='groovyHello')body=`${groovyText(600,405,sm,196,cream,cream,34,900)}${groovyText(600,405,sm,196,navy,rose,12,900)}${groovyText(600,505,ss,30,coral,cream,6,800)}${sparkle(940,175,30,gold)}`;
+    else if(k==='groovyVibes')body=`<path d="M315 155Q365 115 430 145Q480 100 535 140Q600 100 660 140Q730 105 775 155Q855 140 870 215Q930 250 895 315Q925 385 865 420Q850 505 775 495Q720 550 655 510Q595 555 535 510Q465 550 415 495Q335 510 320 440Q250 410 285 340Q245 275 305 235Q280 185 315 155Z" fill="${coral}" stroke="${cream}" stroke-width="24"/><path d="M330 170Q600 90 855 180L880 425Q610 545 315 430Z" fill="${cream}" opacity=".28"/>${groovyMulti(600,305,m,108,cream,rose,8,.78)}${groovyText(600,500,ss,28,plum,cream,5,800)}`;
+    else if(k==='groovySlay')body=`<ellipse cx="600" cy="345" rx="350" ry="190" fill="${gold}" stroke="${cream}" stroke-width="24"/>${groovyText(600,390,sm,145,plum,plum,2,900)}${groovyText(600,475,ss,29,navy,cream,5,800)}`;
+    else if(k==='groovySmile')body=`<ellipse cx="600" cy="350" rx="370" ry="180" fill="${navy}" stroke="${coral}" stroke-width="32"/><ellipse cx="600" cy="350" rx="350" ry="160" fill="none" stroke="${gold}" stroke-width="10"/>${groovyText(560,395,sm,150,cream,cream,2,900)}${happyFace(900,220,62,gold)}${groovyText(600,490,ss,26,gold,navy,4,800)}`;
+    else if(k==='groovyPeace')body=`<ellipse cx="600" cy="345" rx="390" ry="175" fill="${gold}" stroke="${navy}" stroke-width="16"/><ellipse cx="600" cy="345" rx="355" ry="142" fill="none" stroke="${cream}" stroke-width="8"/>${groovyText(600,390,sm,142,navy,gold,2,900)}${groovyText(600,470,ss,27,coral,cream,5,800)}`;
+    else if(k==='groovySweet')body=`<g transform="rotate(-4 600 350)">${groovyText(620,405,sm,164,navy,navy,12,900)}${groovyText(600,380,sm,164,sky,cream,10,900)}${groovyText(600,475,ss,30,plum,cream,5,800)}</g>`;
+    else if(k==='groovyGoodDay')body=`<path d="M330 205Q380 140 445 180Q500 120 560 175Q625 120 680 175Q760 135 795 205Q880 205 865 290Q930 335 875 395Q900 475 815 480Q770 545 700 500Q630 550 565 505Q500 555 435 500Q355 530 325 455Q245 420 290 350Q245 285 315 250Z" fill="${gold}" stroke="${cream}" stroke-width="22"/>${groovyMulti(600,325,m,104,cream,gold,2,.82)}${groovyText(600,500,ss,27,plum,cream,5,800)}${sparkle(310,185,24,cream)}${sparkle(880,455,22,cream)}`;
+    else if(k==='groovyEasy')body=`<path d="M240 245Q330 170 430 220Q520 145 610 215Q705 145 790 225Q910 205 955 310Q990 415 875 465Q790 545 690 490Q590 555 500 490Q385 545 305 465Q205 430 230 335Z" fill="${cream}" stroke="${gold}" stroke-width="18"/>${groovyMulti(600,315,m,116,rose,cream,3,.72)}${groovyText(600,505,ss,28,navy,cream,5,800)}`;
+    else if(k==='groovyChill')body=`<path d="M300 165Q600 95 890 180L850 535Q575 605 300 515Z" fill="${rose}" stroke="${cream}" stroke-width="22" stroke-linejoin="round"/>${groovyMulti(590,300,m,132,plum,rose,2,.74)}${groovyText(590,525,ss,28,navy,cream,5,800)}${sparkle(730,205,31,navy)}${sparkle(445,500,23,navy)}`;
+    else if(k==='groovyKind')body=`<path d="M210 275L340 235H875L990 285L900 365L990 445L835 420H340L205 455L280 365Z" fill="${coral}" stroke="${plum}" stroke-width="12" stroke-linejoin="round"/><rect x="300" y="235" width="590" height="190" rx="36" fill="${gold}" stroke="${cream}" stroke-width="12"/>${groovyText(595,355,sm,112,plum,gold,2,900)}${groovyText(595,405,ss,25,cream,plum,4,800)}`;
+    else if(k==='groovyBelieve')body=`<g transform="rotate(-2 600 350)"><rect x="220" y="235" width="760" height="250" rx="42" fill="${rose}" stroke="${plum}" stroke-width="10" transform="translate(18 22)"/><rect x="220" y="235" width="760" height="250" rx="42" fill="${cream}" stroke="${gold}" stroke-width="18"/>${groovyText(600,365,sm,112,rose,plum,7,900)}${groovyText(600,430,ss,27,navy,cream,4,800)}</g>`;
+    else if(k==='groovyOmg')body=`<path d="M600 95L665 155L755 125L790 215L890 240L855 330L925 400L850 465L855 560L755 575L695 645L600 600L505 645L445 575L345 560L350 465L275 400L345 330L310 240L410 215L445 125L535 155Z" fill="${coral}" stroke="${cream}" stroke-width="20" stroke-linejoin="round"/>${groovyText(600,410,sm,170,cream,plum,10,900)}${groovyText(600,505,ss,28,gold,coral,4,800)}`;
+    else if(k==='groovyHappyFace')body=`${happyFace(600,285,200,rose)}${groovyText(600,555,sm,62,cream,ink,7,900)}${groovyText(600,620,ss,29,navy,cream,5,800)}${sparkle(850,120,25,gold)}`;
+    else if(k==='groovyGhost')body=`<path d="M390 525V285Q390 120 600 120Q810 120 810 285V525L750 470L690 525L630 470L570 525L510 470L450 525Z" fill="${sky}" stroke="${ink}" stroke-width="10" stroke-linejoin="round"/><ellipse cx="520" cy="285" rx="55" ry="70" fill="white" stroke="${ink}" stroke-width="8"/><ellipse cx="680" cy="285" rx="55" ry="70" fill="white" stroke="${ink}" stroke-width="8"/><circle cx="520" cy="295" r="22" fill="${ink}"/><circle cx="680" cy="295" r="22" fill="${ink}"/><path d="M555 390Q600 430 645 390" fill="none" stroke="${ink}" stroke-width="9" stroke-linecap="round"/>${groovyText(600,190,sm,46,cream,ink,6,900)}${groovyText(600,610,ss,27,rose,cream,5,800)}`;
+    else if(k==='groovyTogether')body=`<path d="M355 315Q600 45 845 315" fill="none" stroke="${mint}" stroke-width="100" stroke-linecap="round"/><path d="M380 315Q600 85 820 315" fill="none" stroke="${cream}" stroke-width="72" stroke-linecap="round"/><path d="M410 315Q600 125 790 315" fill="none" stroke="${gold}" stroke-width="44" stroke-linecap="round"/><path d="M275 310Q600 245 925 315L895 535Q600 600 300 535Z" fill="${cream}" stroke="${rose}" stroke-width="20" stroke-linejoin="round"/>${groovyMulti(600,385,m,84,coral,cream,3,.82)}${groovyText(600,555,ss,26,navy,cream,5,800)}`;
+    else if(k==='groovyDaisy')body=`${daisy(600,315,220)}${groovyText(600,345,sm,48,plum,gold,3,900)}${groovyText(600,610,ss,29,coral,cream,5,800)}`;
+    else if(k==='groovyNature')body=`<path d="M330 550V300Q330 120 600 120Q870 120 870 300V550Z" fill="${mint}" stroke="${coral}" stroke-width="25" stroke-linejoin="round"/><path d="M600 440V270M600 355L520 300M600 365L680 300" fill="none" stroke="#27834f" stroke-width="18" stroke-linecap="round"/><circle cx="600" cy="235" r="70" fill="white" stroke="${ink}" stroke-width="7"/>${Array.from({length:8},(_,n)=>`<ellipse cx="600" cy="165" rx="32" ry="62" fill="white" stroke="${ink}" stroke-width="6" transform="rotate(${n*45} 600 235)"/>`).join('')}<circle cx="600" cy="235" r="34" fill="${gold}" stroke="${ink}" stroke-width="6"/><rect x="330" y="435" width="540" height="115" fill="${coral}"/>${groovyText(600,510,sm,72,cream,coral,2,900)}${groovyText(600,610,ss,27,navy,cream,5,800)}`;
+    else body=`<defs><path id="groovyVinylArc" d="M335 350A265 265 0 0 1 865 350"/></defs><circle cx="600" cy="350" r="265" fill="${rose}" stroke="${ink}" stroke-width="10"/><circle cx="600" cy="350" r="175" fill="${ink}"/><path d="M600 175V525M425 350H775" stroke="white" stroke-width="70"/><circle cx="600" cy="350" r="175" fill="none" stroke="${ink}" stroke-width="72" stroke-dasharray="205 70"/><circle cx="600" cy="350" r="55" fill="${rose}" stroke="${ink}" stroke-width="8"/><text font-family="${groovyFont}" font-size="48" font-weight="900" fill="${navy}" stroke="${cream}" stroke-width="5" paint-order="stroke fill"><textPath href="#groovyVinylArc" startOffset="50%" text-anchor="middle">${esc(sm)}</textPath></text>${groovyText(600,630,ss,27,coral,cream,5,800)}`;
+  }else if(chosenStyle==='planner'){
+    const coral=a,green='#238a68',sky='#8fc8df',blush='#f4b2b3',blue2='#176da3',paper='#f7f5ef',red='#df5551',deep='#174f4a';
+    const plannerFont='Segoe Print,Comic Sans MS,KaiTi,楷体,Microsoft YaHei,sans-serif';
+    const plannerNarrow='Arial Narrow,Roboto Condensed,Microsoft YaHei,sans-serif';
+    const one=value=>String(value).replace(/[|\n]/g,' ');
+    const ptext=(x,y,value,size=64,fill=deep,weight=800,anchor='middle',family=plannerFont,stroke='none',sw=0)=>`<text x="${x}" y="${y}" text-anchor="${anchor}" font-family="${family}" font-size="${size}" font-weight="${weight}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" stroke-linejoin="round" paint-order="stroke fill">${esc(value)}</text>`;
+    const pmulti=(x,y,value,size=64,fill=deep,weight=800,leading=1.02,family=plannerFont)=>{let lines=String(value).split(/[|\n]/);return `<text x="${x}" y="${y}" text-anchor="middle" font-family="${family}" font-size="${size}" font-weight="${weight}" fill="${fill}">${lines.map((v,n)=>`<tspan x="${x}" dy="${n?size*leading:0}">${esc(v)}</tspan>`).join('')}</text>`};
+    const rays=(cx,cy,r1=100,r2=145,color=blush)=>Array.from({length:8},(_,n)=>{let q=n*Math.PI/4,x1=cx+Math.cos(q)*r1,y1=cy+Math.sin(q)*r1,x2=cx+Math.cos(q)*r2,y2=cy+Math.sin(q)*r2;return `<path d="M${x1} ${y1}L${x2} ${y2}" stroke="${color}" stroke-width="10" stroke-linecap="round"/>`}).join('');
+    const flower=(cx,cy,r=70,color=blush)=>`${Array.from({length:6},(_,n)=>`<ellipse cx="${cx}" cy="${cy-r*.68}" rx="${r*.34}" ry="${r*.66}" fill="${color}" stroke="${red}" stroke-width="5" transform="rotate(${n*60} ${cx} ${cy})"/>`).join('')}<circle cx="${cx}" cy="${cy}" r="${r*.35}" fill="${paper}" stroke="${red}" stroke-width="5"/>`;
+    const sm=one(m),ss=one(s);
+    if(k==='plannerMeal')body=`<g transform="rotate(1 600 350)">${ptext(610,355,sm,112,blush,900,'middle',plannerNarrow,sky,24)}${ptext(600,345,sm,112,coral,900,'middle',plannerNarrow,deep,3)}${ptext(600,435,ss,28,green,700)}</g>`;
+    else if(k==='plannerForget')body=`<g transform="rotate(-1 600 350)"><path d="M235 235L945 245L925 445L255 430Z" fill="${blush}" opacity=".72"/><path d="M220 215L925 225L910 410L240 395Z" fill="${green}" stroke="${paper}" stroke-width="12"/>${ptext(575,330,sm,72,paper,700,'middle',plannerNarrow)}${ptext(575,375,ss,25,paper,700)}</g>`;
+    else if(k==='plannerWork')body=`<g transform="rotate(-3 600 350)">${ptext(610,385,sm,150,green,900,'middle',plannerNarrow,blush,28)}${ptext(600,375,sm,150,green,900,'middle',plannerNarrow)}${ptext(600,470,ss,29,coral,800)}${rays(285,345,45,85,coral)}${rays(915,345,45,85,coral)}</g>`;
+    else if(k==='plannerGotThis')body=`<path d="M245 225Q600 185 955 225L915 470Q600 505 275 465Z" fill="${green}" stroke="${paper}" stroke-width="12"/>${ptext(600,350,sm,92,paper,900,'middle',plannerNarrow)}${ptext(600,420,ss,29,blush,800)}<path d="M320 500Q600 530 880 495" fill="none" stroke="${green}" stroke-width="12" stroke-linecap="round"/>`;
+    else if(k==='plannerRemember')body=`<path d="M315 440Q245 410 285 340Q235 285 310 245Q325 175 405 195Q455 125 525 185Q600 125 670 190Q755 145 790 220Q880 205 895 290Q955 340 900 405Q865 475 780 455Z" fill="${sky}" stroke="${paper}" stroke-width="16"/>${ptext(600,330,sm,82,paper,900,'middle',plannerNarrow)}${ptext(600,395,ss,26,blue2,800)}`;
+    else if(k==='plannerNotes')body=`<rect x="315" y="205" width="570" height="275" rx="125" fill="${blush}" stroke="${paper}" stroke-width="15"/><rect x="345" y="230" width="510" height="225" rx="105" fill="none" stroke="${paper}" stroke-width="7"/>${ptext(600,350,sm,112,paper,500,'middle',plannerNarrow)}${ptext(600,420,ss,25,red,800)}`;
+    else if(k==='plannerTodo')body=`<ellipse cx="600" cy="340" rx="355" ry="165" fill="${blush}" stroke="${paper}" stroke-width="17"/><ellipse cx="600" cy="340" rx="320" ry="135" fill="none" stroke="${paper}" stroke-width="6"/>${ptext(600,360,sm,112,green,900,'middle',plannerNarrow)}${ptext(600,425,ss,25,paper,800)}<circle cx="320" cy="315" r="8" fill="${paper}"/><circle cx="880" cy="365" r="8" fill="${paper}"/>`;
+    else if(k==='plannerTomorrow')body=`${ptext(600,390,sm,132,blue2,800,'middle',plannerFont,blush,24)}${ptext(600,390,sm,132,blue2,800)}${ptext(600,475,ss,29,green,800)}${flower(365,190,42,blush)}`;
+    else if(k==='plannerBuy')body=`<ellipse cx="600" cy="335" rx="340" ry="160" fill="${sky}" stroke="${paper}" stroke-width="16"/><ellipse cx="600" cy="335" rx="305" ry="128" fill="none" stroke="${blue2}" stroke-width="6"/>${ptext(600,350,sm,104,blue2,800,'middle',plannerNarrow)}${ptext(600,420,ss,26,paper,800)}`;
+    else if(k==='plannerWeekend')body=`<rect x="270" y="240" width="660" height="210" rx="95" fill="${paper}" stroke="${blush}" stroke-width="8"/>${ptext(600,360,sm,105,coral,800,'middle',plannerNarrow)}${ptext(600,415,ss,24,green,800)}`;
+    else if(k==='plannerToday')body=`<defs><linearGradient id="plannerTodayColor" x1="0" x2="1"><stop offset="0" stop-color="${coral}"/><stop offset=".48" stop-color="${green}"/><stop offset="1" stop-color="${blue2}"/></linearGradient></defs>${ptext(600,390,sm,150,'url(#plannerTodayColor)',800,'middle',plannerNarrow)}${ptext(600,475,ss,28,blush,800)}<path d="M335 425Q600 455 865 420" fill="none" stroke="${paper}" stroke-width="11"/>`;
+    else if(k==='plannerImportant')body=`<rect x="245" y="215" width="710" height="250" rx="35" fill="${paper}" stroke="${paper}" stroke-width="18"/>${ptext(600,355,sm,100,blush,700,'middle',plannerNarrow)}<path d="M330 410H870" stroke="${green}" stroke-width="11" stroke-linecap="round"/><path d="M475 448H725" stroke="${green}" stroke-width="8" stroke-linecap="round"/>${ptext(600,510,ss,25,blue2,800)}`;
+    else if(k==='plannerNiceDay')body=`<circle cx="600" cy="330" r="225" fill="${coral}" stroke="${paper}" stroke-width="15"/><circle cx="600" cy="330" r="190" fill="none" stroke="${paper}" stroke-width="7"/>${pmulti(600,260,m,70,paper,700,.88,plannerNarrow)}${ptext(600,485,ss,27,paper,800)}<circle cx="440" cy="220" r="8" fill="${paper}"/><circle cx="760" cy="420" r="8" fill="${paper}"/>`;
+    else if(k==='plannerYay')body=`${rays(600,340,205,270,blush)}${ptext(600,400,sm,190,blue2,800,'middle',plannerNarrow,paper,26)}${ptext(600,400,sm,190,blue2,800,'middle',plannerNarrow)}${ptext(600,515,ss,30,coral,800)}`;
+    else if(k==='plannerExercise')body=`<path d="M290 430H910" stroke="${blush}" stroke-width="42" stroke-linecap="round"/><path d="M335 365V495M285 385V475M865 365V495M915 385V475" stroke="${blush}" stroke-width="34" stroke-linecap="round"/>${ptext(600,350,sm,116,blue2,800,'middle',plannerNarrow,blush,22)}${ptext(600,350,sm,116,blue2,800,'middle',plannerNarrow)}${ptext(600,545,ss,27,green,800)}`;
+    else if(k==='plannerOkay')body=`<path d="M600 115L640 205L740 145L735 245L840 230L790 320L895 350L790 390L850 480L740 460L730 565L640 505L600 600L555 505L465 565L460 460L350 485L405 390L300 350L405 315L350 225L465 245L460 145L555 205Z" fill="${blush}"/>${ptext(600,315,sm,110,blue2,900,'middle',plannerNarrow)}<circle cx="535" cy="375" r="10" fill="${blue2}"/><circle cx="665" cy="375" r="10" fill="${blue2}"/><path d="M525 420Q600 480 675 420" fill="none" stroke="${blue2}" stroke-width="10" stroke-linecap="round"/>${ptext(600,555,ss,26,green,800)}`;
+    else if(k==='plannerCactus')body=`<path d="M455 405Q440 205 535 145Q610 95 690 155Q770 220 745 405Z" fill="${green}" stroke="${paper}" stroke-width="10"/><path d="M470 390H730L780 560Q600 640 420 560Z" fill="${blush}" stroke="${red}" stroke-width="9"/><path d="M435 455Q600 515 765 455M445 510Q600 570 755 510" fill="none" stroke="${red}" stroke-width="7"/>${rays(600,270,70,105,paper)}${ptext(600,260,sm,55,paper,900)}${ptext(600,630,ss,27,green,800)}`;
+    else if(k==='plannerMug')body=`<ellipse cx="570" cy="500" rx="250" ry="70" fill="${sky}"/><path d="M370 230H750V475Q600 560 405 465Z" fill="${blush}" stroke="${blue2}" stroke-width="10"/><path d="M750 285Q930 275 895 405Q875 480 750 430" fill="none" stroke="${blush}" stroke-width="55"/><path d="M750 285Q930 275 895 405Q875 480 750 430" fill="none" stroke="${blue2}" stroke-width="10"/><ellipse cx="560" cy="230" rx="190" ry="48" fill="${blue2}"/><ellipse cx="560" cy="230" rx="150" ry="28" fill="${paper}"/>${ptext(560,365,sm,62,blue2,900)}${ptext(600,600,ss,27,green,800)}<path d="M480 145Q455 90 480 45M560 145Q535 90 560 45M640 145Q615 90 640 45" fill="none" stroke="${sky}" stroke-width="8" stroke-linecap="round"/>`;
+    else if(k==='plannerMoon')body=`<path d="M680 105Q455 165 455 360Q455 550 680 590Q545 485 555 350Q565 205 680 105Z" fill="${sky}" stroke="${paper}" stroke-width="10"/><circle cx="825" cy="205" r="13" fill="${blush}"/><circle cx="870" cy="350" r="10" fill="${blush}"/>${flower(815,500,30,blush)}${ptext(535,350,sm,58,blue2,900,'middle',plannerNarrow,paper,5)}${ptext(600,645,ss,27,blue2,800)}`;
+    else body=`<path d="M760 180Q690 110 620 190Q550 105 475 180Q385 280 620 470Q850 280 760 180Z" fill="${coral}" stroke="${paper}" stroke-width="16"/><path d="M625 205Q565 145 515 210Q460 280 625 415Q785 280 735 210Q685 145 625 205Z" fill="${sky}" stroke="${red}" stroke-width="8"/><path d="M850 130V500Q850 585 760 585" fill="none" stroke="${green}" stroke-width="18" stroke-linecap="round"/>${ptext(625,310,sm,52,paper,900)}${ptext(600,625,ss,27,deep,800)}`;
+  }else if(chosenStyle==='sweetheart'){
+    const honey=a,coral='#f27655',cream='#fff8e9',sun='#ffd17a',rose='#df6f78',orangeLine='#e79a45',soft='#fff1dc';
+    const sweetFont='Cooper Black,Cooper Std Black,Georgia,Arial Black,Microsoft YaHei,sans-serif';
+    const clean=value=>String(value).replace(/[|\n]/g,' ');
+    const stext=(x,y,value,size=68,fill=cream,stroke='none',sw=0,anchor='middle')=>`<text x="${x}" y="${y}" text-anchor="${anchor}" font-family="${sweetFont}" font-size="${size}" font-weight="900" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" stroke-linejoin="round" paint-order="stroke fill">${esc(value)}</text>`;
+    const smulti=(x,y,value,size=72,fill=cream,leading=.9,stroke='none',sw=0)=>{let lines=String(value).split(/[|\n]/);return `<text x="${x}" y="${y}" text-anchor="middle" font-family="${sweetFont}" font-size="${size}" font-weight="900" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" stroke-linejoin="round" paint-order="stroke fill">${lines.map((v,n)=>`<tspan x="${x}" dy="${n?size*leading:0}">${esc(v)}</tspan>`).join('')}</text>`};
+    const sparkle=(x,y,r=22,color=honey)=>`<path d="M${x} ${y-r}L${x+r*.22} ${y-r*.22}L${x+r} ${y}L${x+r*.22} ${y+r*.22}L${x} ${y+r}L${x-r*.22} ${y+r*.22}L${x-r} ${y}L${x-r*.22} ${y-r*.22}Z" fill="${color}"/>`;
+    const heart=(cx,cy,size=65,fill=coral,stroke=orangeLine,sw=5)=>`<path d="M${cx} ${cy+size*.72}C${cx-size*.18} ${cy+size*.48} ${cx-size} ${cy-size*.05} ${cx-size} ${cy-size*.52}C${cx-size} ${cy-size*1.08} ${cx-size*.25} ${cy-size*1.2} ${cx} ${cy-size*.64}C${cx+size*.25} ${cy-size*1.2} ${cx+size} ${cy-size*1.08} ${cx+size} ${cy-size*.52}C${cx+size} ${cy-size*.05} ${cx+size*.18} ${cy+size*.48} ${cx} ${cy+size*.72}Z" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" stroke-linejoin="round"/>`;
+    const bubble=(path,inner,fill=cream)=>`<path d="${path}" fill="${fill}" stroke="${honey}" stroke-width="38" stroke-linejoin="round"/><path d="${path}" fill="${fill}" stroke="${orangeLine}" stroke-width="7" stroke-linejoin="round"/>${inner}`;
+    const main=clean(m),sub=clean(s);
+    if(k==='sweetStarlight')body=bubble('M260 175Q600 70 940 175Q1010 205 985 310Q1020 420 925 455H420L325 555L330 455Q235 420 260 315Q220 235 260 175Z',`${smulti(610,280,m,86,honey,.88)}${stext(610,455,sub,27,rose)}${sparkle(370,220,20,sun)}${sparkle(850,250,18,sun)}`);
+    else if(k==='sweetShine')body=bubble('M455 100Q600 35 745 100Q830 155 800 300Q835 475 735 535L670 625L650 540Q500 555 420 455Q350 330 390 190Q405 130 455 100Z',`${smulti(600,245,m,76,honey,.9)}${stext(600,470,sub,26,rose)}${sparkle(500,165,18,sun)}${sparkle(700,445,18,sun)}`);
+    else if(k==='sweetBabyBear')body=bubble('M270 190Q600 70 930 190Q1000 230 970 345Q1015 430 920 470H800L880 555L745 480H340Q240 440 275 345Q225 260 270 190Z',`${smulti(600,285,m,88,honey,.9)}${stext(600,455,sub,27,coral)}${sparkle(330,250,18,sun)}${sparkle(880,230,18,sun)}`);
+    else if(k==='sweetBomb')body=bubble('M315 435Q235 390 285 315Q240 245 330 220Q360 120 460 180Q520 95 600 175Q685 95 745 185Q855 135 875 240Q965 285 910 365Q940 455 835 475H365Z',`${smulti(600,300,m,96,coral,.84)}${stext(600,445,sub,26,honey)}`);
+    else if(k==='sweetPudding')body=bubble('M245 210Q600 85 955 210Q1020 255 980 360Q1010 455 910 485H780L830 565L710 500H350Q245 455 275 360Q215 285 245 210Z',`${smulti(600,275,m,91,cream,.86)}${stext(600,450,sub,27,rose)}${sparkle(350,285,18,cream)}${sparkle(850,260,18,cream)}`,honey);
+    else if(k==='sweetHead')body=bubble('M250 170Q600 45 950 170Q1025 230 985 345Q1020 450 915 480H360L275 570L290 475Q205 420 250 330Q205 240 250 170Z',`${smulti(600,265,m,88,cream,.88)}${stext(600,455,sub,27,rose)}${sparkle(340,245,18,cream)}${sparkle(850,380,18,cream)}`,honey);
+    else if(k==='sweetMelt')body=bubble('M365 115Q600 45 835 115Q945 155 925 285Q990 365 920 455Q840 575 600 565Q355 575 280 455Q205 365 280 285Q255 155 365 115Z',`${smulti(600,270,m,88,honey,.9)}${stext(600,490,sub,27,rose)}${sparkle(430,190,18,sun)}${sparkle(770,405,18,sun)}`);
+    else if(k==='sweetChu')body=`<ellipse cx="600" cy="335" rx="285" ry="150" fill="${coral}" stroke="${honey}" stroke-width="32"/><ellipse cx="600" cy="335" rx="260" ry="125" fill="none" stroke="${rose}" stroke-width="7"/>${stext(600,365,main,115,cream)}${stext(600,455,sub,27,rose)}`;
+    else if(k==='sweetForever')body=`<rect x="315" y="175" width="570" height="340" rx="40" fill="${cream}" stroke="${honey}" stroke-width="26"/><rect x="335" y="195" width="530" height="300" rx="28" fill="none" stroke="${rose}" stroke-width="6"/>${smulti(600,295,m,96,honey,.88)}${stext(600,470,sub,26,coral)}`;
+    else if(k==='sweetQueen')body=`<rect x="240" y="235" width="720" height="220" rx="105" fill="${cream}" stroke="${honey}" stroke-width="25"/><rect x="265" y="258" width="670" height="174" rx="82" fill="none" stroke="${rose}" stroke-width="6"/>${stext(600,365,main,101,coral)}${stext(600,430,sub,25,honey)}`;
+    else if(k==='sweetStar')body=`<rect x="270" y="230" width="660" height="225" rx="78" fill="${honey}" stroke="${orangeLine}" stroke-width="9"/><rect x="295" y="255" width="610" height="175" rx="58" fill="none" stroke="${cream}" stroke-width="6"/>${stext(600,370,main,104,cream)}${stext(600,435,sub,25,rose)}`;
+    else if(k==='sweetCute')body=`<rect x="290" y="235" width="620" height="220" rx="88" fill="${coral}" stroke="${honey}" stroke-width="24"/><rect x="315" y="260" width="570" height="170" rx="65" fill="none" stroke="${rose}" stroke-width="6"/>${stext(600,370,main,105,cream)}${stext(600,435,sub,25,honey)}`;
+    else if(k==='sweetSugarboo')body=`<rect x="205" y="245" width="790" height="205" rx="92" fill="${cream}" stroke="${honey}" stroke-width="24"/><rect x="230" y="267" width="740" height="160" rx="72" fill="none" stroke="${rose}" stroke-width="6"/>${stext(600,365,main,84,honey)}${stext(600,425,sub,24,coral)}`;
+    else if(k==='sweetHeart')body=`${heart(600,340,235,cream,rose,7)}${heart(600,345,170,'none',honey,19)}${stext(600,330,main,79,honey)}${stext(600,430,sub,27,coral)}`;
+    else if(k==='sweetTriple')body=`${heart(600,330,245,honey,orangeLine,8)}${smulti(600,255,m,75,cream,.88)}${stext(600,510,sub,27,rose)}${sparkle(430,250,16,cream)}${sparkle(770,385,16,cream)}`;
+    else if(k==='sweetBalloons')body=`<path d="M430 485Q500 545 600 620M600 500Q600 555 600 620M770 480Q700 545 600 620" fill="none" stroke="${orangeLine}" stroke-width="8"/>${heart(430,255,92,sun,orangeLine,7)}${heart(600,290,105,coral,orangeLine,7)}${heart(770,245,90,honey,orangeLine,7)}${stext(600,350,main,55,cream,rose,5)}${stext(600,665,sub,26,rose)}`;
+    else if(k==='sweetHeartNote')body=`<path d="M310 225Q300 170 365 165H835Q900 170 890 235V435Q895 500 825 500H690L600 575L515 500H370Q305 500 310 435Z" fill="${cream}" stroke="${rose}" stroke-width="8"/>${heart(600,300,110,coral,orangeLine,6)}${stext(600,315,main,36,cream)}${stext(600,470,sub,27,honey)}`;
+    else if(k==='sweetMarry')body=`<rect x="230" y="165" width="740" height="390" rx="35" fill="${cream}" stroke="${rose}" stroke-width="8"/><path d="M230 165H970V350H230Z" fill="${honey}"/><path d="M230 350H970" stroke="${rose}" stroke-width="7"/>${stext(600,290,main,96,cream)}${stext(600,445,sub,64,honey)}${stext(600,520,'CHOOSE LOVE',25,coral)}`;
+    else if(k==='sweetPretty')body=bubble('M300 185Q600 60 900 185Q990 230 955 350Q995 465 870 490H740L800 565L685 505H350Q230 465 275 350Q225 250 300 185Z',`${smulti(600,275,m,103,cream,.86)}${stext(600,475,sub,28,rose)}${sparkle(360,260,20,cream)}${sparkle(845,390,18,cream)}`,honey);
+    else body=bubble('M420 85Q600 30 780 85Q880 145 850 280Q900 420 810 520Q725 625 600 640Q475 625 390 520Q300 420 350 280Q320 145 420 85Z',`${smulti(600,245,m,93,cream,.88)}${stext(600,535,sub,28,rose)}${sparkle(455,170,17,cream)}${sparkle(750,425,18,cream)}`,honey);
+  }else{
+    const forest=a,deep='#174b35',leafGreen='#79a96b',sage='#b8d8a8',pale='#dcebcf',cream2='#f7f4e9',olive='#8ea35f',mint='#d9efdc';
+    const botFont='Cooper Black,Georgia,Arial Black,Microsoft YaHei,sans-serif';
+    const botScript='Segoe Script,Segoe Print,KaiTi,楷体,Microsoft YaHei,cursive';
+    const btext=(x,y,value,size=72,fill=deep,stroke=cream2,sw=0,family=botFont,anchor='middle')=>`<text x="${x}" y="${y}" text-anchor="${anchor}" font-family="${family}" font-size="${size}" font-weight="900" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" stroke-linejoin="round" paint-order="stroke fill">${esc(value)}</text>`;
+    const bmulti=(x,y,value,size=78,fill=deep,leading=.86,stroke=cream2,sw=0,family=botFont)=>{let lines=String(value).split(/[|\n]/);return `<text x="${x}" y="${y}" text-anchor="middle" font-family="${family}" font-size="${size}" font-weight="900" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" stroke-linejoin="round" paint-order="stroke fill">${lines.map((v,n)=>`<tspan x="${x}" dy="${n?size*leading:0}">${esc(v)}</tspan>`).join('')}</text>`};
+    const sparkle=(x,y,r=25,color=leafGreen)=>`<path d="M${x} ${y-r}L${x+r*.22} ${y-r*.22}L${x+r} ${y}L${x+r*.22} ${y+r*.22}L${x} ${y+r}L${x-r*.22} ${y+r*.22}L${x-r} ${y}L${x-r*.22} ${y-r*.22}Z" fill="${color}" stroke="${cream2}" stroke-width="4"/>`;
+    const leaf=(x,y,scale=1,color=leafGreen,rot=0)=>`<path d="M${x} ${y}C${x+55*scale} ${y-85*scale} ${x+135*scale} ${y-55*scale} ${x+125*scale} ${y+20*scale}C${x+65*scale} ${y+45*scale} ${x+20*scale} ${y+30*scale} ${x} ${y}Z" fill="${color}" stroke="${deep}" stroke-width="${5*scale}" transform="rotate(${rot} ${x} ${y})"/><path d="M${x+10*scale} ${y+5*scale}L${x+100*scale} ${y-25*scale}" stroke="${cream2}" stroke-width="${4*scale}" transform="rotate(${rot} ${x} ${y})"/>`;
+    const single=value=>String(value).replace(/[|\n]/g,' '),main=single(m),sub=single(s);
+    if(k==='botHotRead')body=`<path d="M245 260Q600 160 955 245L920 445Q600 505 275 440Z" fill="${cream2}" stroke="white" stroke-width="28"/>${btext(600,355,main,98,leafGreen,cream2,8,botScript)}${leaf(800,210,.55,forest,-15)}${btext(600,440,sub,27,deep,cream2,4)}`;
+    else if(k==='botChapter')body=`<path d="M300 455Q235 420 275 350Q235 285 315 250Q330 170 420 195Q475 120 545 185Q620 120 690 190Q780 145 820 225Q910 220 925 305Q980 360 915 420Q865 480 780 460Z" fill="${pale}" stroke="white" stroke-width="28"/>${btext(600,355,main,91,leafGreen,cream2,6,botScript)}${btext(600,440,sub,26,deep)}`;
+    else if(k==='botBookish')body=`<path d="M300 165Q600 105 895 175L870 535Q600 585 315 525Z" fill="${sage}" stroke="white" stroke-width="28"/>${bmulti(600,270,m,106,deep,.76,cream2,7)}${btext(600,520,sub,26,forest)}`;
+    else if(k==='botBigBook')body=`<path d="M300 210Q350 155 420 195Q475 135 540 190Q610 130 670 195Q755 145 795 220Q895 220 890 310Q950 360 895 425Q865 510 770 475Q700 535 630 480Q555 540 485 485Q390 525 350 450Q260 430 300 350Q245 285 300 210Z" fill="${leafGreen}" stroke="white" stroke-width="28"/>${bmulti(600,300,m,104,cream2,.82)}${btext(600,505,sub,27,deep)}`;
+    else if(k==='botBookClub')body=`<ellipse cx="600" cy="340" rx="270" ry="245" fill="${sage}" stroke="white" stroke-width="28"/><ellipse cx="600" cy="340" rx="238" ry="215" fill="none" stroke="${deep}" stroke-width="7"/>${bmulti(600,225,m,84,deep,.88)}<path d="M475 390Q540 360 600 415Q660 360 725 390V505Q660 475 600 520Q540 475 475 505Z" fill="${cream2}" stroke="${deep}" stroke-width="7"/>${btext(600,585,sub,25,forest)}`;
+    else if(k==='botTherapy')body=`<path d="M245 240Q600 145 955 240L910 505Q600 565 285 505Z" fill="${mint}" stroke="white" stroke-width="30"/>${bmulti(600,310,m,110,leafGreen,.78,cream2,5)}${btext(600,535,sub,26,deep)}`;
+    else if(k==='botGrowing')body=`${leaf(570,175,.85,leafGreen,-35)}${leaf(610,180,.78,sage,25)}<path d="M600 235V330" stroke="${deep}" stroke-width="13" stroke-linecap="round"/><rect x="310" y="265" width="580" height="285" rx="52" fill="${cream2}" stroke="white" stroke-width="28"/>${bmulti(600,360,m,105,forest,.8,cream2,3)}${btext(600,520,sub,27,leafGreen)}`;
+    else if(k==='botGarden')body=`<path d="M320 525V285Q320 125 600 125Q880 125 880 285V525Z" fill="${pale}" stroke="white" stroke-width="28"/>${leaf(330,220,.55,leafGreen,-15)}${leaf(780,225,.5,sage,20)}${bmulti(600,300,m,104,leafGreen,.82,cream2,5)}${btext(600,520,sub,27,deep)}`;
+    else if(k==='botPowered')body=`<rect x="255" y="220" width="690" height="280" rx="55" fill="${cream2}" stroke="white" stroke-width="28"/>${leaf(760,215,.55,forest,-25)}${bmulti(555,315,m,94,forest,.82)}${btext(555,490,sub,26,leafGreen)}`;
+    else if(k==='botProtect')body=`<circle cx="600" cy="340" r="235" fill="${sage}" stroke="white" stroke-width="30"/><circle cx="600" cy="340" r="205" fill="none" stroke="${cream2}" stroke-width="7" stroke-dasharray="15 12"/>${bmulti(600,300,m,56,deep,.98)}${sparkle(420,255,22,cream2)}${sparkle(790,425,20,cream2)}${btext(600,545,sub,25,forest)}`;
+    else if(k==='botKindle')body=`<rect x="325" y="115" width="550" height="470" rx="32" fill="${cream2}" stroke="white" stroke-width="28"/><rect x="365" y="155" width="470" height="350" rx="14" fill="${sage}" stroke="${deep}" stroke-width="8"/>${bmulti(600,285,m,46,cream2,1)}<circle cx="600" cy="545" r="17" fill="${leafGreen}"/>${btext(600,630,sub,25,deep)}`;
+    else if(k==='botMain')body=`<path d="M320 190Q600 105 880 190L845 515Q600 585 350 515Z" fill="${cream2}" stroke="white" stroke-width="28"/>${sparkle(345,225,25,leafGreen)}${sparkle(855,430,22,sage)}${bmulti(600,320,m,62,forest,.92)}${btext(600,515,sub,26,leafGreen)}`;
+    else if(k==='botStress')body=`<g transform="rotate(-4 600 350)"><path d="M275 190Q600 130 925 205L875 535Q600 585 315 520Z" fill="${sage}" stroke="white" stroke-width="30"/>${bmulti(600,300,m,105,deep,.78)}${btext(600,520,sub,27,forest)}</g>`;
+    else if(k==='botVibes')body=`${bmulti(610,315,m,125,cream2,.78,leafGreen,18)}${bmulti(600,300,m,125,leafGreen,.78,deep,3)}${btext(600,535,sub,28,deep)}${sparkle(840,220,24,sage)}`;
+    else if(k==='botComing')body=`<g transform="rotate(1 600 350)"><rect x="315" y="145" width="570" height="430" fill="${olive}" stroke="white" stroke-width="28"/>${bmulti(600,300,m,64,cream2,.94)}${btext(600,520,sub,27,pale)}</g>`;
+    else if(k==='botAttract')body=`<path d="M300 180Q600 95 900 180L865 540Q600 605 335 540Z" fill="${cream2}" stroke="white" stroke-width="30"/>${Array.from({length:7},(_,n)=>`<circle cx="${350+n*83}" cy="205" r="18" fill="${n%2?leafGreen:sage}"/>`).join('')}${bmulti(600,330,m,48,forest,1.02)}${btext(600,535,sub,26,leafGreen)}`;
+    else if(k==='botFuture')body=`<path d="M245 220Q600 150 955 220L925 495Q600 555 275 495Z" fill="${pale}" stroke="white" stroke-width="30"/>${bmulti(600,310,m,103,cream2,.8,leafGreen,11)}${btext(600,510,sub,26,deep)}`;
+    else if(k==='botBooks')body=`<g transform="rotate(-4 600 350)"><rect x="340" y="190" width="510" height="90" rx="18" fill="${sage}" stroke="${deep}" stroke-width="7"/><rect x="305" y="285" width="560" height="95" rx="18" fill="${deep}" stroke="${cream2}" stroke-width="8"/><rect x="360" y="385" width="500" height="90" rx="18" fill="${olive}" stroke="${deep}" stroke-width="7"/>${btext(595,360,main,65,cream2)}${btext(600,560,sub,26,forest)}</g>`;
+    else if(k==='botPlants')body=`${[360,520,680,840].map((x,n)=>`<path d="M${x-45} 420H${x+45}L${x+30} 555H${x-30}Z" fill="${n%2?sage:cream2}" stroke="${deep}" stroke-width="6"/>${leaf(x-5,370,.35,n%2?forest:leafGreen,-55)}${leaf(x+5,375,.32,sage,10)}`).join('')}${btext(600,320,main,70,deep,cream2,5)}${btext(600,620,sub,26,forest)}`;
+    else body=`<g transform="rotate(3 600 350)"><rect x="315" y="125" width="570" height="475" rx="25" fill="${pale}" stroke="white" stroke-width="30"/><rect x="520" y="90" width="160" height="55" rx="12" fill="${olive}"/><path d="M600 300C520 205 430 275 505 365C545 410 585 355 600 325C615 355 655 410 695 365C770 275 680 205 600 300Z" fill="${leafGreen}" stroke="${deep}" stroke-width="7"/>${btext(600,470,main,66,deep,cream2,4)}${btext(600,545,sub,25,forest)}</g>`;
   }
   if(chosenStyle==='sketch'){
+    const readableHandFont='KaiTi,楷体,STKaiti,华文楷体,Microsoft YaHei,Segoe Print,Comic Sans MS,sans-serif';
     body=body.replace(/stroke-width="(\d+(?:\.\d+)?)"/g,(_,value)=>`stroke-width="${Number(value)*2}"`);
+    body=body.replace(/(<text\b[^>]*\sfont-family=")[^"]*(")/g,`$1${readableHandFont}$2`);
     body=body.replace(/(<text\b[^>]*\sfill=")[^"]*(")/g,'$1#fff$2');
+    body=body.replace(/<text\b[^>]*>/g,tag=>tag
+      .replace(/\sstroke="[^"]*"/g,'')
+      .replace(/\sstroke-width="[^"]*"/g,'')
+      .replace(/\spaint-order="[^"]*"/g,'')
+      .replace(/\sstroke-linejoin="[^"]*"/g,'')
+      .replace(/\stext-rendering="[^"]*"/g,'')
+      .replace('>',' stroke="#19181d" stroke-width="8" stroke-linejoin="round" paint-order="stroke fill" text-rendering="geometricPrecision">'));
   }
   if(chosenStyle==='fresh'){
-    const cuteFont='FZShuTi,方正舒体,STXingkai,华文行楷,YouYuan,幼圆,KaiTi,楷体,Segoe Print,Comic Sans MS,cursive';
+    const cuteFont='Microsoft YaHei UI,Microsoft YaHei,YouYuan,幼圆,KaiTi,楷体,sans-serif';
     body=body.replace(/(<text\b[^>]*\sfont-family=")[^"]*(")/g,`$1${cuteFont}$2`);
-    body=body.replace(/(<text\b[^>]*\sfill=")[^"]*(")/g,'$1#fff$2');
+    body=body.replace(/(<text\b[^>]*\sfill=")[^"]*(")/g,'$1#fffdf5$2');
     body=body.replace(/font-size="(\d+(?:\.\d+)?)"/g,(_,value)=>`font-size="${Math.round(Number(value)*1.15)}"`);
     body=body.replace(/<text\b[^>]*>/g,tag=>tag
       .replace(/\sstroke="[^"]*"/g,'')
       .replace(/\sstroke-width="[^"]*"/g,'')
       .replace(/\spaint-order="[^"]*"/g,'')
-      .replace('>',' stroke="#19181d" stroke-width="10" stroke-linejoin="round" paint-order="stroke fill">'));
-    body=`<defs><filter id="fresh-soft-color" color-interpolation-filters="sRGB"><feColorMatrix type="saturate" values="0.72"/><feComponentTransfer><feFuncR type="linear" slope="1.3"/><feFuncG type="linear" slope="1.3"/><feFuncB type="linear" slope="1.3"/></feComponentTransfer></filter></defs><g filter="url(#fresh-soft-color)">${body}</g>`;
+      .replace(/\sfont-weight="[^"]*"/g,' font-weight="700"')
+      .replace('>',' stroke="#303540" stroke-width="3" stroke-linejoin="round" paint-order="stroke fill" text-rendering="geometricPrecision">'));
+    const freshText=[];
+    body=body.replace(/<text\b[^>]*>[\s\S]*?<\/text>/g,node=>{freshText.push(node);return ''});
+    body=`<defs><filter id="fresh-soft-color" color-interpolation-filters="sRGB"><feColorMatrix type="saturate" values="0.78"/><feComponentTransfer><feFuncR type="linear" slope="1.18"/><feFuncG type="linear" slope="1.18"/><feFuncB type="linear" slope="1.18"/></feComponentTransfer></filter></defs><g filter="url(#fresh-soft-color)">${body}</g><g id="fresh-crisp-text">${freshText.join('')}</g>`;
   }
+  if(chosenStyle==='feminine')body=body.replace(/#19181d/gi,'#2d2d35').replace(/#ffffff/gi,'#fffdf9').replace(/#fff(?=["'])/gi,'#fffdf9').replace(/#cfff42/gi,'#d4ef5d');
+  if(chosenStyle==='universal')body=body.replace(/#ff1f26/gi,'#ef454b').replace(/#ffd21f/gi,'#f5cf3e').replace(/#2550d9/gi,'#405fd0').replace(/#24262c/gi,'#30343d').replace(/#19181d/gi,'#2c3039').replace(/#10205d/gi,'#263768').replace(/#fff(?=["'])/gi,'#fffdf5');
+  const compactValue=value=>esc(value).replace(/[|｜\n\s]/g,'');
+  const mainKey=compactValue(m);
+  const textRanges={feminine:[52,118],fresh:[70,138],universal:[52,116]};
+  const textScales={feminine:1.12,fresh:1.08,universal:1.1};
+  const clearFonts={feminine:'Arial Black,Microsoft YaHei,sans-serif',fresh:'Microsoft YaHei UI,Microsoft YaHei,YouYuan,幼圆,sans-serif',universal:'Arial Black,Microsoft YaHei,sans-serif'};
+  const textTuning={
+    feminine:{toast:[58,338],headline:[104,358],outline:[104,358],stats:[56,328],dots:[52,368],poll:[58,313],checklist:[56,258],caption:[58,338],search:[52,328],tabs:[52,338],profile:[52,333]},
+    fresh:{smile:[70,218],laptop:[74,245],envelope:[74,308],headphones:[74,328],cursor:[70,520],bubbletea:[70,318],emoji:[70,338],ok:[132,390]},
+    universal:{comicOmg:[86,348],wrapCard:[60,278,600],factStrip:[46,328],keyInfo:[44,353],propertyCard:[64,423],reviewBubble:[54,358],reviewStack:[64,243],roomLabel:[60,328],metricChip:[52,328],locationTag:[54,308]}
+  };
+  body=body.replace(/<text\b[^>]*>[\s\S]*?<\/text>/g,node=>{
+    const visible=node.replace(/<[^>]+>/g,'').replace(/[|｜\n\s]/g,'');
+    if(mainKey&&visible.includes(mainKey)){
+      const range=textRanges[chosenStyle],tune=textTuning[chosenStyle]?.[k];
+      let tuned=node.replace(/^<text\b[^>]*>/,tag=>{
+        let next=tag;
+        if(range)next=next.replace(/font-size="(\d+(?:\.\d+)?)"/,(_,value)=>`font-size="${Math.round(Math.max(range[0],Math.min(range[1],Number(value)*textScales[chosenStyle])))}"`);
+        if(clearFonts[chosenStyle])next=next.replace(/font-family="[^"]*"/,`font-family="${clearFonts[chosenStyle]}"`);
+        if(tune){next=next.replace(/font-size="\d+(?:\.\d+)?"/,`font-size="${tune[0]}"`);if(/\sy="[^"]*"/.test(next))next=next.replace(/\sy="[^"]*"/,` y="${tune[1]}"`);if(tune[2]&&/\sx="[^"]*"/.test(next))next=next.replace(/\sx="[^"]*"/,` x="${tune[2]}"`)}
+        next=/\stransform="/.test(next)?next.replace(/transform="([^"]*)"/,`transform="translate(0 22) $1"`):next.replace('<text','<text transform="translate(0 22)"');
+        return next.replace(/\stext-rendering="[^"]*"/g,'').replace('>',' text-rendering="geometricPrecision">');
+      });
+      if(tune?.[2])tuned=tuned.replace(/<tspan x="[^"]*"/g,`<tspan x="${tune[2]}"`);
+      return tuned;
+    }
+    if(visible&&!/[A-Za-z0-9\u3400-\u9fff]/.test(visible))return node;
+    return '';
+  });
   let result=`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-label="${esc(items()[i][1])}">${body}</svg>`;styleKey=old;return result;
 }
 function setStyle(next){styleKey=next;selected=0;filter='全部';document.body.style.setProperty('--accent',lib().accent);renderChrome();render()}
